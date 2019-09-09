@@ -1,5 +1,5 @@
 <?
-
+// Check for proxy headers
 if(array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER)) {
 	$proxy = $_SERVER['REMOTE_ADDR'];
 	$real = $_SERVER['HTTP_X_FORWARDED_FOR'];
@@ -8,6 +8,7 @@ if(array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER)) {
 	$real = $_SERVER['REMOTE_ADDR'];
 }
 
+// check if for v6 or v4
 if(filter_var($real, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
 	$ip4 = $real;
 	$ip6 = "None Detected";
@@ -19,6 +20,7 @@ if(filter_var($real, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
 	$ip4 = "Unknown";
 }
 
+// capture user agent if present
 if(array_key_exists('HTTP_USER_AGENT', $_SERVER)) $ua = $_SERVER['HTTP_USER_AGENT'];
 else $ua= "No User Agent Detected";
 
